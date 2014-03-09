@@ -1,4 +1,4 @@
-package com.semeru.model.entites;
+package com.semeru.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
