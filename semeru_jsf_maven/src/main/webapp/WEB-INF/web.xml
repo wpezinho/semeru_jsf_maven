@@ -21,13 +21,11 @@
     </session-config>
     
      <!-- Endereço dos arquivos de configuração do Spring -->
-    
+<!--    
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/spring-security.xml
-        </param-value>
-    </context-param> 
+        <param-value>/WEB-INF/spring-security.xml</param-value>        
+    </context-param> -->
 
     <!-- Configurações do tema do PrimeFaces -->
     <context-param>  
@@ -36,7 +34,7 @@
     </context-param>         
     
     <!-- Filtros do Spring  -->
-    <listener>
+<!--    <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <filter>
@@ -48,7 +46,7 @@
         <url-pattern>/*</url-pattern>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
+    </filter-mapping>-->
     
         <!-- Configurações do JavaServer Faces -->
     
