@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name="mbCidade")
-@SessionScoped
+@RequestScoped
 public class MbCidade implements Serializable{
     
      private static final long serialVersionUID = 1L;
@@ -21,6 +21,7 @@ public class MbCidade implements Serializable{
      private List<Cidade> cidades;
 
     public MbCidade() {
+        
     }
      
      private InterfaceDAO<Cidade> cidadeDAO(){
@@ -29,7 +30,7 @@ public class MbCidade implements Serializable{
      }
       public String limpCidade() {
           cidade = new Cidade();
-          return "/Restrict/cadastrarcidade.faces";
+          return editCidade();
       }
      public String editCidade(){
          return "/Restrict/cadastrarcidade.faces";
@@ -68,8 +69,13 @@ public class MbCidade implements Serializable{
     }
 
     public List<Cidade> getCidades() {
-        cidades = cidadeDAO().getEntites();
-        return cidades;
+        try {
+          cidades = cidadeDAO().getEntites();
+            return cidades;  
+        } catch (Exception e) {
+            System.out.println("###################### Falho porra: "+e.getMessage());
+        }return null;
+
     }
 
     public void setCidades(List<Cidade> cidades) {

@@ -3,26 +3,26 @@ package com.semeru.util;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import javax.sound.midi.Soundbank;
 import org.hibernate.Session;
 
 public class PhasesListenerSemeru implements PhaseListener{
 
     //antes da fase
-    @Override
-    public void afterPhase(PhaseEvent fase) {
-          System.out.println("Antes da fase: " + fase.getPhaseId());
-        if (fase.getPhaseId().equals(PhaseId.RESTORE_VIEW)){
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            FacesContextUtil.setRequestSession(session);
-        }
-    }
-
-    //depois da fase
+    //Antes da Fase
     @Override
     public void beforePhase(PhaseEvent fase) {
-        System.out.println("Depois da fase: " + fase.getPhaseId());
+        System.out.println("Antes da fase: "+ fase.getPhaseId());
+        if (fase.getPhaseId().equals(PhaseId.RESTORE_VIEW)) {            
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            FacesContextUtil.setRequestSession(session);            
+        }
+    }
+    
+    //Depois da Fase
+    @Override
+    public void afterPhase(PhaseEvent fase) {
+        System.out.println("Depois da fase: "+ fase.getPhaseId());
         if (fase.getPhaseId().equals(PhaseId.RENDER_RESPONSE)) {
             Session session = FacesContextUtil.getRequestSession();
             try {
@@ -31,7 +31,7 @@ public class PhasesListenerSemeru implements PhaseListener{
                 if (session.getTransaction().isActive()) {
                     session.getTransaction().rollback();
                 }
-            }finally{
+            } finally{
                 session.close();
             }
         }
@@ -41,5 +41,6 @@ public class PhasesListenerSemeru implements PhaseListener{
     public PhaseId getPhaseId() {
         return PhaseId.ANY_PHASE;
     }
+    
     
 }

@@ -2,7 +2,7 @@ package com.semeru.model.dao;
 
 import java.io.Serializable;
 import java.util.List;
-import org.hibernate.Criteria;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 
@@ -49,18 +49,22 @@ public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable{
 
     @Override
     public T getEntityByDetachedCriteria(DetachedCriteria criteria) {
-         T entity = (T)criteria.getExecutableCriteria(session).uniqueResult();
-         return entity;
+        T entity = (T)criteria.getExecutableCriteria(session).uniqueResult();
+        return entity;
     }
 
+        
     @Override
     public List<T> getListByDetachedCriteria(DetachedCriteria criteria) {
         return criteria.getExecutableCriteria(session).list();
     }
-    @Override
+        
+     @Override
     public List<T> getEntites() {
-        List<T> entites = (List<T>)session.createCriteria(classe).list();
-        return entites;
+              
+         List<T> enties = (List<T>) session.createCriteria(classe).list();
+         // System.out.println("############# DEPOIS ##############################");
+        return enties;  
     }
 
     

@@ -179,7 +179,7 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>3.4.2</version>
+            <version>4.0</version>
         </dependency>
         
         <!-- ######## TEMAS DO PRIMEFACES ######### -->        
@@ -259,7 +259,8 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>            
+            <version>4.0.1.Final</version>
+            <type>jar</type>
         </dependency>
 
         <!-- ########### HIBERNATE ANTLR ########### -->
