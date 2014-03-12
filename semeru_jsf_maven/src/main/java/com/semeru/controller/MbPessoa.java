@@ -4,8 +4,10 @@ import com.semeru.model.dao.HibernateDAO;
 import com.semeru.model.dao.InterfaceDAO;
 import com.semeru.model.entities.Endereco;
 import com.semeru.model.entities.Pessoa;
+import com.semeru.model.entities.Sexo;
 import com.semeru.util.FacesContextUtil;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -24,6 +26,8 @@ public class MbPessoa implements Serializable{
      private List<Endereco> enderecos;
 
     public MbPessoa() {
+       
+        
     }
      
      private InterfaceDAO<Pessoa> pessoaDAO(){
@@ -43,7 +47,9 @@ public class MbPessoa implements Serializable{
           return "/Restrict/cadastrarpessoa.faces";
       }
       public String addPessoa(){
-          if(pessoa.getIdPessoa() == null || pessoa.getIdPessoa() == 0){
+          Date date = new Date();
+          if(pessoa.getIdPessoa() == 0 || pessoa.getIdPessoa() == null){
+              pessoa.setDataDeCadastro(date);
               insertPessoa();
           }else{
               updatePessoa();
@@ -53,17 +59,21 @@ public class MbPessoa implements Serializable{
 
     private void insertPessoa() {
         pessoaDAO().save(pessoa);
+          endereco.setPessoa(pessoa);
+        enderecoDAO().save(endereco);
         FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!",""));
     }
 
     private void updatePessoa() {
         pessoaDAO().update(pessoa);
+        enderecoDAO().update(endereco);
         FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!",""));
     }
     public String deletePessoa(){
         pessoaDAO().revome(pessoa);
+        enderecoDAO().revome(endereco);
         FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Regisro excluido com sucesso!",""));
         
