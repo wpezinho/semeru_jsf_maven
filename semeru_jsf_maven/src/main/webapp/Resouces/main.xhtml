@@ -8,17 +8,29 @@
       xmlns:p="http://primefaces.org/ui"
       ><!-- xmlns:sec="http://www.springframework.org/security/facelets/tags" -->
 
-    <h:head>
+     <h:head>
         <title>Semeru - Curso de JSF e Maven</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="./../Resouces/Restrict/css/semeru.css" rel="stylesheet" type="text/css" />
-        <link href="./../Resouces/Restrict/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />    
+        <link href="#{facesContext.externalContext.requestContextPath}/Resouces/Restrict/css/semeru.css" rel="stylesheet" type="text/css" />
+        <link href="#{facesContext.externalContext.requestContextPath}/Resouces/Restrict/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />    
     </h:head>
+
 
     <h:body>
 
         <div id="topo">
-            <a href="http://www.semeru.com.br/"><div id="logotipo"></div></a>            
+            <a href="http://www.semeru.com.br/"><div id="logotipo"></div></a> 
+            <div id="logoff">
+                <h:form>
+                    <br/>
+                    <h5><h:outputText value="SEJA BEM VINDO(A) #{bbUsuarioLogado.procuraPessoa().getNome()}!"/></h5>
+                    <br/>
+                    <a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+	                <h4>LOGOFF</h4>
+	            </a>
+
+                </h:form>
+            </div>
                         
             
         </div>  
@@ -29,9 +41,10 @@
 
                     <p:submenu label="Cadastros">  
                         <p:menuitem value="Cidades" url="/Restrict/cadastrarCidade.faces"/> 
-                        <p:menuitem value="Pessoas" url="/Restrict/cadastrarpessoa.faces"/>               
+                        <p:menuitem value="Pessoas" action="#{mbPessoa.limpPesssoa}" ajax="false"/>               
                     </p:submenu> 
                     <p:submenu label="Consultas">  
+                         <p:menuitem value="Consultar" url="/Restrict/consultarpessoa.faces"/> 
                     </p:submenu>                                      
                 </p:menubar> 
             </h:form>           

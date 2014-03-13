@@ -8,10 +8,10 @@
         <phase-listener>com.semeru.util.PhasesListenerSemeru</phase-listener>
     </lifecycle>
     
-<!--    <factory>
+    <factory>
 	  <exception-handler-factory>
 	    com.semeru.exceptions.CustomExceptionHandlerFactory
 	  </exception-handler-factory>
-	</factory>-->
+	</factory>
 
 </faces-config>
